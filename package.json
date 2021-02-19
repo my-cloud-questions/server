@@ -1,0 +1,79 @@
+{
+  "name": "cloud-questions-server",
+  "author": "Cloud Questions",
+  "description": "Server application for cloud questions project. Uses node, express and DynamoDB",
+  "keywords": [
+    "cloud questions"
+  ],
+  "license": "MIT",
+  "version": "1.0.0",
+  "dependencies": {
+    "@babel/runtime-corejs3": "7.11.2",
+    "ajv": "6.12.3",
+    "ajv-keywords": "3.5.2",
+    "aws-sdk": "^2.754.0",
+    "aws-serverless-express": "3.3.8",
+    "body-parser": "1.19.0",
+    "core-js": "3.6.5",
+    "dynamoose": "^2.5.0",
+    "express": "4.17.1",
+    "http-status-codes": "1.4.0",
+    "nanoid": "3.1.11",
+    "regenerator-runtime": "0.13.7"
+  },
+  "main": "src/app.js",
+  "scripts": {
+    "start": "npm run dev",
+    "server": "node dist/app.js",
+    "transpile": "babel ./src --out-dir dist",
+    "clean": "rimraf dist",
+    "build": "npm-run-all clean transpile",
+    "dev": "set NODE_ENV=development && npm-run-all build server",
+    "prod:build": "webpack --env.AWS_LAMBDA=true --config webpack.config.js",
+    "dev:watch": "nodemon",
+    "lint": "eslint ./src",
+    "prettier": "prettier --write ./src/**"
+  },
+  "engines": {
+    "node": "12.18.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/my-cloud-questions/server.git"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.10.5",
+    "@babel/core": "7.10.5",
+    "@babel/plugin-transform-runtime": "7.10.5",
+    "@babel/preset-env": "7.10.4",
+    "babel-loader": "8.1.0",
+    "clean-webpack-plugin": "3.0.0",
+    "copy-webpack-plugin": "6.1.0",
+    "eslint": "7.5.0",
+    "eslint-config-standard": "14.1.1",
+    "eslint-plugin-import": "2.22.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-standard": "4.0.1",
+    "husky": "4.2.5",
+    "lint-staged": "10.2.11",
+    "nodemon": "2.0.4",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.0.5",
+    "rimraf": "3.0.2",
+    "webpack": "4.44.0",
+    "webpack-cli": "3.3.12"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}
