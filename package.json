@@ -9,10 +9,10 @@
   "version": "1.0.0",
   "dependencies": {
     "@babel/runtime-corejs3": "7.11.2",
+    "@vendia/serverless-express": "^4.3.2",
     "ajv": "6.12.3",
     "ajv-keywords": "3.5.2",
     "aws-sdk": "^2.754.0",
-    "aws-serverless-express": "3.3.8",
     "body-parser": "1.19.0",
     "core-js": "3.6.5",
     "dynamoose": "^2.5.0",
