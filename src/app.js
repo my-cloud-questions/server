@@ -3,20 +3,21 @@
 import "core-js";
 import "regenerator-runtime/runtime";
 
+import { connect as dynamodbConnect } from "./database/operations";
 import express from "express";
 import setupRoutes from "./routes/index.js";
 
 // import { jsonBodyParser } from "./middlewares/bodyParser.js";
 
 // import corsMiddleware from "./middlewares/cors.js";
-// import { connect as dynamodbConnect } from "./database/dynamodb/operations";
+
 // import errorHandler from "./middlewares/errorHandler.js";
 
 // import logger from "./middlewares/logger.js";
 
 const app = express();
 
-// dynamodbConnect();
+dynamodbConnect();
 
 // Middlewares
 // app.use(corsMiddleware);
