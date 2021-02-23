@@ -22,3 +22,11 @@ export const connect = async () => {
     console.log(err);
   }
 };
+
+export const scan = async (model) => {
+  return model.scan().exec();
+};
+
+export const query = async (model, indexKey, indexValue) => {
+  return model.query(indexKey).eq(indexValue).exec();
+};

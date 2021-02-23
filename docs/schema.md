@@ -30,7 +30,7 @@
 
 <br>
 
-### questions-meta
+### questions-meta-data
 
 | id      | courseId  | categoryId                                   |
 | ------- | --------- | -------------------------------------------- |
