@@ -12,6 +12,10 @@ export const connect = async () => {
       // Set DynamoDB instance to the Dynamoose DDB instance
       await dynamoose.aws.ddb.set(ddb);
     } else {
+      const sdk = dynamoose.aws.sdk; // require("aws-sdk");
+      sdk.config.update({
+        region: "us-east-1"
+      });
       await dynamoose.aws.ddb.local();
     }
 
