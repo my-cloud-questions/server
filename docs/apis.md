@@ -1,3 +1,15 @@
+### API List
+
+1. [Get Platforms](#get-platforms)
+2. [Get Courses](#get-courses)
+3. [Get Categories](#get-categories)
+4. [Get Questions Meta Data](#get-questions-meta-data)
+5. [Add new question](#add-new-question)
+6. [Edit question](#edit-question)
+7. [Delete question](#delete-question)
+
+<br>
+
 ### Get Platforms
 
 #### Endpoint
@@ -34,6 +46,7 @@ x-api-key: API Key obtained from AWS API Gateway
   ]
 }
 ```
+
 <br>
 
 ### Get Courses
@@ -72,6 +85,7 @@ x-api-key: API Key obtained from AWS API Gateway
   ]
 }
 ```
+
 <br>
 
 ### Get Categories
@@ -110,6 +124,7 @@ x-api-key: API Key obtained from AWS API Gateway
   ]
 }
 ```
+
 <br>
 
 ### Get Questions Meta Data
@@ -145,17 +160,18 @@ x-api-key: API Key obtained from AWS API Gateway
   ]
 }
 ```
+
 <br>
 
-## Add new question
+### Add new question
 
-### Endpoint
+#### Endpoint
 
 ```
 POST /authenticated/question
 ```
 
-### Request Headers
+#### Request Headers
 
 ```
 Content-Type: application/json
@@ -163,24 +179,23 @@ Authorization: JWT obtained from AWS Cognito
 x-api-key: API Key obtained from AWS API Gateway
 ```
 
-### Request Body
+#### Request Body
 
 ```
-Type: JSON
 {
-    platform: String,
-    course: String,
-    category: String,
-    type: String, // single/multiple
-    question: String,
-    options: [
-      {
-        label: String,
-        value: String,
-        correct: Boolean,
-        reason: String, // why answer is correct/wrong markdown format
-      }
-    ]
+  "platform": String,
+  "course": String,
+  "category": String,
+  "type": String, // single/multiple
+  "question": String,
+  "options": [
+    {
+      "label": String,
+      "value": String,
+      "correct": Boolean,
+      "reason": String, // why answer is correct/wrong markdown format
+    }
+  ]
 }
 ```
 
@@ -193,17 +208,18 @@ Type: JSON
 403: Forbidden(Incorrect API Key)
 500: Server Error
 ```
+
 <br>
 
-## Edit question
+### Edit question
 
-### Endpoint
+#### Endpoint
 
 ```
 PUT /authenticated/question/{QUESTION_ID}
 ```
 
-### Request Headers
+#### Request Headers
 
 ```
 Content-Type: application/json
@@ -211,24 +227,23 @@ Authorization: JWT obtained from AWS Cognito
 x-api-key: API Key obtained from AWS API Gateway
 ```
 
-### Request Body
+#### Request Body
 
 ```
-Type: JSON
 {
-    platform: String,
-    course: String,
-    category: String,
-    type: String, // single/multiple
-    question: String,
-    options: [
-      {
-        label: String,
-        value: String,
-        correct: Boolean,
-        reason: String, // why answer is correct/wrong markdown format
-      }
-    ]
+  "platform": String,
+  "course": String,
+  "category": String,
+  "type": String, // single/multiple
+  "question": String,
+  "options": [
+    {
+      "label": String,
+      "value": String,
+      "correct": Boolean,
+      "reason": String, // why answer is correct/wrong markdown format
+    }
+  ]
 }
 ```
 
@@ -241,18 +256,18 @@ Type: JSON
 403: Forbidden(Incorrect API Key)
 500: Server Error
 ```
+
 <br>
 
+### Delete question
 
-## Delete question
-
-### Endpoint
+#### Endpoint
 
 ```
 DELETE /authenticated/question/{QUESTION_ID}
 ```
 
-### Request Headers
+#### Request Headers
 
 ```
 Authorization: JWT obtained from AWS Cognito
@@ -267,4 +282,5 @@ x-api-key: API Key obtained from AWS API Gateway
 403: Forbidden(Incorrect API Key)
 500: Server Error
 ```
+
 <br>
