@@ -152,7 +152,7 @@ x-api-key: API Key obtained from AWS API Gateway
 ### Endpoint
 
 ```
-POST /question
+POST /authenticated/question
 ```
 
 ### Request Headers
@@ -168,9 +168,103 @@ x-api-key: API Key obtained from AWS API Gateway
 ```
 Type: JSON
 {
-    platform: "string", // [See supported platforms](./values.md#supported-platforms)
-    course: "string", // [See supported courses](./values.md#supported-courses)
-    category: "",
-
+    platform: String,
+    course: String,
+    category: String,
+    type: String, // single/multiple
+    question: String,
+    options: [
+      {
+        label: String,
+        value: String,
+        correct: Boolean,
+        reason: String, // why answer is correct/wrong markdown format
+      }
+    ]
 }
 ```
+
+#### Response Status
+
+```
+201: Created
+400: Bad Request (Validation Error)
+401: Unauthorized(Incorrect Auth Token)
+403: Forbidden(Incorrect API Key)
+500: Server Error
+```
+<br>
+
+## Edit question
+
+### Endpoint
+
+```
+PUT /authenticated/question/{QUESTION_ID}
+```
+
+### Request Headers
+
+```
+Content-Type: application/json
+Authorization: JWT obtained from AWS Cognito
+x-api-key: API Key obtained from AWS API Gateway
+```
+
+### Request Body
+
+```
+Type: JSON
+{
+    platform: String,
+    course: String,
+    category: String,
+    type: String, // single/multiple
+    question: String,
+    options: [
+      {
+        label: String,
+        value: String,
+        correct: Boolean,
+        reason: String, // why answer is correct/wrong markdown format
+      }
+    ]
+}
+```
+
+#### Response Status
+
+```
+204: Success (No Content)
+400: Bad Request (Validation Error)
+401: Unauthorized(Incorrect Auth Token)
+403: Forbidden(Incorrect API Key)
+500: Server Error
+```
+<br>
+
+
+## Delete question
+
+### Endpoint
+
+```
+DELETE /authenticated/question/{QUESTION_ID}
+```
+
+### Request Headers
+
+```
+Authorization: JWT obtained from AWS Cognito
+x-api-key: API Key obtained from AWS API Gateway
+```
+
+#### Response Status
+
+```
+200: Success (Ok)
+401: Unauthorized(Incorrect Auth Token)
+403: Forbidden(Incorrect API Key)
+500: Server Error
+```
+<br>
