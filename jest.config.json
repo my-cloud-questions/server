@@ -1,0 +1,21 @@
+{
+  "bail": 1,
+  "clearMocks": true,
+  "collectCoverage": true,
+  "collectCoverageFrom": [
+    "**/*.{js,jsx}",
+    "!**/node_modules/**",
+    "!**/*.test.js"
+  ],
+  "coverageDirectory": "coverage",
+  "coverageProvider": "babel",
+  "coverageThreshold": {
+    "global": {
+      "branches": 80,
+      "functions": 80,
+      "lines": 80,
+      "statements": -10
+    }
+  },
+  "testEnvironment": "node"
+}
