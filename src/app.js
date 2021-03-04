@@ -10,8 +10,7 @@ import setupRoutes from "./routes/index.js";
 
 // import corsMiddleware from "./middlewares/cors.js";
 // import { connect as dynamodbConnect } from "./database/dynamodb/operations";
-// import errorHandler from "./middlewares/errorHandler.js";
-
+import errorHandler from "./middlewares/errorHandler";
 // import logger from "./middlewares/logger.js";
 
 const app = express();
@@ -25,7 +24,7 @@ const app = express();
 
 setupRoutes(app);
 
-// app.use(errorHandler);
+app.use(errorHandler);
 
 if (!process.env.EXECUTION_ENV_SERVERLESS) {
   const PORT = process.env.PORT || 3000;
