@@ -1,4 +1,4 @@
-import errorHandler from "./errorHandler";
+import errorHandler from ".";
 
 const mockNext = jest.fn();
 const mockRequest = {};
