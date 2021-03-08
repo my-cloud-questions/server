@@ -11,3 +11,4 @@
 
 ### Quality checks
 - [ ] Unit tests covered
+- [ ] Github issue/project linked (Either link the PR to an open issue from this repository or link it to project)
