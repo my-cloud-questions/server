@@ -4,6 +4,7 @@ import "core-js";
 import "regenerator-runtime/runtime";
 
 import express from "express";
+import logger from "./middlewares/logger";
 import setupRoutes from "./routes/index.js";
 
 // import { jsonBodyParser } from "./middlewares/bodyParser.js";
@@ -12,8 +13,6 @@ import setupRoutes from "./routes/index.js";
 // import { connect as dynamodbConnect } from "./database/dynamodb/operations";
 // import errorHandler from "./middlewares/errorHandler.js";
 
-// import logger from "./middlewares/logger.js";
-
 const app = express();
 
 // dynamodbConnect();
@@ -21,7 +20,8 @@ const app = express();
 // Middlewares
 // app.use(corsMiddleware);
 // app.use(jsonBodyParser);
-// app.use(logger);
+
+app.use(logger);
 
 setupRoutes(app);
 
