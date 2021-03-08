@@ -1,7 +1,10 @@
 import errorHandler from ".";
 
 const mockNext = jest.fn();
-const mockRequest = {};
+const mockAddEvent = jest.fn();
+const mockDone = jest.fn();
+
+const mockRequest = { logger: { addEvent: mockAddEvent, done: mockDone } };
 const mockResponse = {
   status: jest.fn(),
   json: jest.fn()
@@ -29,4 +32,29 @@ test("it should return Internal Server Error message when error object does not 
   expect(mockResponse.json).toHaveBeenCalledWith({
     customErrorMessage: "Internal Server Error"
   });
+});
+
+test("it should log error event", () => {
+  errorHandler(
+    { status: 400, message: "MOCK_MESSAGE" },
+    mockRequest,
+    mockResponse,
+    mockNext
+  );
+
+  expect(mockAddEvent).toHaveBeenCalledTimes(1);
+  expect(mockAddEvent).toHaveBeenCalledWith("MOCK_MESSAGE");
+
+  expect(mockDone).toHaveBeenCalledTimes(1);
+});
+
+test("it should log error event when there is an error", () => {
+  errorHandler(null, mockRequest, mockResponse, mockNext);
+
+  expect(mockAddEvent).toHaveBeenCalledTimes(1);
+  expect(mockAddEvent).toHaveBeenCalledWith(
+    "Cannot read property 'status' of null"
+  );
+
+  expect(mockDone).toHaveBeenCalledTimes(1);
 });
