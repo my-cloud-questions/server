@@ -3,6 +3,7 @@
 import "core-js";
 import "regenerator-runtime/runtime";
 
+import errorHandler from "./middlewares/errorHandler";
 import express from "express";
 import logger from "./middlewares/logger";
 import setupRoutes from "./routes/index.js";
@@ -11,7 +12,6 @@ import setupRoutes from "./routes/index.js";
 
 // import corsMiddleware from "./middlewares/cors.js";
 // import { connect as dynamodbConnect } from "./database/dynamodb/operations";
-// import errorHandler from "./middlewares/errorHandler.js";
 
 const app = express();
 
@@ -25,7 +25,7 @@ app.use(logger);
 
 setupRoutes(app);
 
-// app.use(errorHandler);
+app.use(errorHandler);
 
 if (!process.env.EXECUTION_ENV_SERVERLESS) {
   const PORT = process.env.PORT || 3000;

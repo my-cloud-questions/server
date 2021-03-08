@@ -3,10 +3,11 @@
   "clearMocks": true,
   "collectCoverage": true,
   "collectCoverageFrom": [
-    "**/*.{js,jsx}",
+    "src/**/*.js",
     "!**/node_modules/**",
-    "!**/*.test.js"
+    "!**/**/*.test.js"
   ],
+  "testPathIgnorePatterns": ["/node_modules/", "/dist/"],
   "coverageDirectory": "coverage",
   "coverageProvider": "babel",
   "coverageThreshold": {
