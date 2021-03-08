@@ -3,7 +3,7 @@
   "clearMocks": true,
   "collectCoverage": true,
   "collectCoverageFrom": [
-    "src/**/*.{js,jsx}",
+    "src/**/*.js",
     "!**/node_modules/**",
     "!**/**/*.test.js"
   ],
