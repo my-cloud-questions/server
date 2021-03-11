@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 import * as dynamoose from "dynamoose";
 
-import { connect } from ".";
+import { connect, scan, query } from ".";
 
 const updateMock = jest.fn();
 const dynamoDBMock = jest.fn(() => ({
@@ -8,6 +9,13 @@ const dynamoDBMock = jest.fn(() => ({
 }));
 const localMock = jest.fn();
 const setMock = jest.fn();
+console.log = jest.fn();
+const modelMock = {
+  scan: jest.fn().mockReturnThis(),
+  exec: jest.fn(),
+  query: jest.fn().mockReturnThis(),
+  eq: jest.fn().mockReturnThis()
+};
 
 describe("connect", () => {
   describe("when process.env.EXECUTION_ENV_SERVERLESS is true", () => {
@@ -31,6 +39,25 @@ describe("connect", () => {
       });
     });
 
+    describe("when connected to database", () => {
+      test("it should log Connected event", async () => {
+        setMock.mockResolvedValue();
+        await connect();
+        expect(console.log).toHaveBeenCalledTimes(1);
+        expect(console.log).toHaveBeenCalledWith("Connected to DynamoDB");
+      });
+    });
+
+    describe("when error in connection to database", () => {
+      test("it should log connection error", async () => {
+        const mockError = new Error("mockErrorMessage");
+        setMock.mockRejectedValueOnce(mockError);
+        await connect();
+        expect(console.log).toHaveBeenCalledTimes(1);
+        expect(console.log).toHaveBeenCalledWith(mockError);
+      });
+    });
+
     afterEach(() => {
       delete global.process.env.EXECUTION_ENV_SERVERLESS;
     });
@@ -51,5 +78,55 @@ describe("connect", () => {
       connect();
       expect(localMock).toHaveBeenCalledTimes(1);
     });
+
+    describe("when connected to database", () => {
+      test("it should log Connected event", async () => {
+        localMock.mockResolvedValue();
+        await connect();
+        expect(console.log).toHaveBeenCalledTimes(1);
+        expect(console.log).toHaveBeenCalledWith("Connected to local DynamoDB");
+      });
+    });
+
+    describe("when error in connection to database", () => {
+      test("it should log connection error", async () => {
+        const mockError = new Error("mockErrorMessage");
+        localMock.mockRejectedValueOnce(mockError);
+        await connect();
+        expect(console.log).toHaveBeenCalledTimes(1);
+        expect(console.log).toHaveBeenCalledWith(mockError);
+      });
+    });
+  });
+});
+
+describe("scan", () => {
+  test("it should call scan", async () => {
+    await scan(modelMock);
+    expect(modelMock.scan).toHaveBeenCalledTimes(1);
+  });
+
+  test("it should call exec", async () => {
+    await scan(modelMock);
+    expect(modelMock.exec).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("query", () => {
+  test("it should call query", async () => {
+    await query(modelMock, "mockIndexKey", "mockIndexValue");
+    expect(modelMock.query).toHaveBeenCalledTimes(1);
+    expect(modelMock.query).toHaveBeenCalledWith("mockIndexKey");
+  });
+
+  test("it should call eq", async () => {
+    await query(modelMock, "mockIndexKey", "mockIndexValue");
+    expect(modelMock.eq).toHaveBeenCalledTimes(1);
+    expect(modelMock.eq).toHaveBeenCalledWith("mockIndexValue");
+  });
+
+  test("it should call exec", async () => {
+    await query(modelMock, "mockIndexKey", "mockIndexValue");
+    expect(modelMock.exec).toHaveBeenCalledTimes(1);
   });
 });

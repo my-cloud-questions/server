@@ -9,16 +9,17 @@ export const connect = async () => {
       });
       // Set DynamoDB instance to the Dynamoose DDB instance
       await dynamoose.aws.ddb.set(ddb);
+      // eslint-disable-next-line no-console
+      console.log("Connected to DynamoDB");
     } else {
       const sdk = dynamoose.aws.sdk;
       sdk.config.update({
         region: "us-east-1"
       });
       await dynamoose.aws.ddb.local();
+      // eslint-disable-next-line no-console
+      console.log("Connected to local DynamoDB");
     }
-
-    // eslint-disable-next-line no-console
-    console.log("Connected to DynamoDB");
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log(err);
