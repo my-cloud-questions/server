@@ -3,6 +3,7 @@
 import "core-js";
 import "regenerator-runtime/runtime";
 
+import { connect } from "./database/operations";
 import errorHandler from "./middlewares/errorHandler";
 import express from "express";
 import logger from "./middlewares/logger";
@@ -11,29 +12,34 @@ import setupRoutes from "./routes/index.js";
 // import { jsonBodyParser } from "./middlewares/bodyParser.js";
 
 // import corsMiddleware from "./middlewares/cors.js";
-// import { connect as dynamodbConnect } from "./database/dynamodb/operations";
 
-const app = express();
+export const init = () => {
+  const app = express();
 
-// dynamodbConnect();
+  connect();
 
-// Middlewares
-// app.use(corsMiddleware);
-// app.use(jsonBodyParser);
+  // Middlewares
+  // app.use(corsMiddleware);
+  // app.use(jsonBodyParser);
 
-app.use(logger);
+  app.use(logger);
 
-setupRoutes(app);
+  setupRoutes(app);
 
-app.use(errorHandler);
+  app.use(errorHandler);
 
-if (!process.env.EXECUTION_ENV_SERVERLESS) {
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, async () => {
-    // eslint-disable-next-line no-console
-    console.log("Node server listening on " + PORT);
-  });
-}
+  if (!process.env.EXECUTION_ENV_SERVERLESS) {
+    const PORT = process.env.PORT || "3000";
+    app.listen(parseInt(PORT), () => {
+      // eslint-disable-next-line no-console
+      console.log("Node server listening on " + PORT);
+    });
+  }
 
-exports.app = app;
-export default app;
+  return app;
+};
+
+const expressApp = init();
+
+exports.app = expressApp;
+export default expressApp;
