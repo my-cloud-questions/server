@@ -1,8 +1,6 @@
-import * as dynamoose from "dynamoose";
+import { Schema } from "dynamoose";
 
-import config from "../../config";
-
-const courseSchema = new dynamoose.Schema({
+const courseSchema = new Schema({
   id: {
     type: String,
     hashKey: true
@@ -17,6 +15,4 @@ const courseSchema = new dynamoose.Schema({
   name: String
 });
 
-const coursesModel = dynamoose.model("courses", courseSchema, config);
-
-export default coursesModel;
+export default courseSchema;
