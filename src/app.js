@@ -7,7 +7,7 @@ import { connect } from "./database/operations";
 import errorHandler from "./middlewares/errorHandler";
 import express from "express";
 import logger from "./middlewares/logger";
-import setupRoutes from "./routes/index.js";
+import setupRoutes from "./routes";
 
 // import { jsonBodyParser } from "./middlewares/bodyParser.js";
 
