@@ -1,14 +1,7 @@
 import errorHandler from ".";
 
-const mockNext = jest.fn();
-const mockAddEvent = jest.fn();
-const mockDone = jest.fn();
-
-const mockRequest = { logger: { addEvent: mockAddEvent, done: mockDone } };
-const mockResponse = {
-  status: jest.fn().mockReturnThis(),
-  json: jest.fn()
-};
+const mockAddEvent = mockRequest.logger.addEvent;
+const mockDone = mockRequest.logger.done;
 
 describe("when error object has status", () => {
   let error;

@@ -14,5 +14,6 @@
     "quotes": ["error", "double"],
     "semi": ["error", "always"],
     "no-console": "error"
-  }
+  },
+  "globals": {"mockRequest":"writable", "mockResponse":"writable", "mockNext":"writable"}
 }
