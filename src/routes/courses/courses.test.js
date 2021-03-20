@@ -1,12 +1,7 @@
 import { query } from "../../database/operations";
 import courses from ".";
 
-jest.mock("../../database/model/courses", () => {
-  return {
-    __esModule: true,
-    default: jest.fn()
-  };
-});
+jest.mock("../../database/model/courses", () => jest.fn());
 
 const mockRequest = {
   logger: {

@@ -20,12 +20,7 @@ jest.mock("express", () => {
 });
 
 jest.mock("./middlewares/logger");
-jest.mock("./routes", () => {
-  return {
-    __esModule: true,
-    default: jest.fn()
-  };
-});
+jest.mock("./routes", () => jest.fn());
 console.log = jest.fn();
 
 test("it should call express", () => {

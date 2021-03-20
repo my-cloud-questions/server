@@ -2,20 +2,8 @@ import health from "./health";
 import courses from "./courses";
 import setupRoutes from ".";
 
-jest.mock("./health", () => {
-  return {
-    __esModule: true,
-    default: jest.fn()
-  };
-});
-
-jest.mock("./courses", () => {
-  return {
-    __esModule: true,
-    default: jest.fn()
-  };
-});
-
+jest.mock("./health", () => jest.fn());
+jest.mock("./courses", () => jest.fn());
 const mockApp = { get: jest.fn() };
 
 beforeEach(() => {
