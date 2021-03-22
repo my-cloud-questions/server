@@ -1,15 +1,11 @@
 const health = (req, res, next) => {
-  try {
-    req.logger.addEvent("health start");
-    res.status(200);
-    res.json({
-      status: "Healthy"
-    });
-    req.logger.addEvent("send response");
-    req.logger.done();
-  } catch (e) {
-    next(e);
-  }
+  req.logger.addEvent("Started");
+  res.status(200);
+  res.json({
+    status: "Healthy"
+  });
+  req.logger.addEvent("Send response");
+  req.logger.done();
 };
 
 export default health;

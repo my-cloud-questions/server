@@ -1,10 +1,8 @@
 const errorHandler = (err, req, res, next) => {
   try {
-    res.status(err.status || 500);
-    res.json({
-      customErrorMessage: err.message || "Internal Server Error"
-    });
-    req.logger.addEvent(err.message);
+    const message = (err.status && err.message) || "Internal Server Error";
+    res.status(err.status || 500).json({ message });
+    req.logger.addEvent(message);
   } catch (e) {
     req.logger.addEvent(e.message);
   } finally {

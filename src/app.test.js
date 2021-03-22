@@ -5,7 +5,7 @@ import errorHandler from "./middlewares/errorHandler";
 import express from "express";
 import { init } from "./app";
 import logger from "./middlewares/logger";
-import setupRoutes from "./routes/index.js";
+import setupRoutes from "./routes";
 
 jest.mock("./database/operations");
 jest.mock("./middlewares/errorHandler");
@@ -20,7 +20,7 @@ jest.mock("express", () => {
 });
 
 jest.mock("./middlewares/logger");
-jest.mock("./routes/index.js");
+jest.mock("./routes", () => jest.fn());
 console.log = jest.fn();
 
 test("it should call express", () => {
@@ -40,6 +40,7 @@ test("it should use logger middleware", () => {
 
 test("it should call setupRoutes", () => {
   const app = init();
+
   expect(setupRoutes).toHaveBeenCalledTimes(1);
   expect(setupRoutes).toHaveBeenCalledWith(app);
 });

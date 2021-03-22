@@ -19,5 +19,5 @@
     }
   },
   "testEnvironment": "node",
-  "setupFiles": ["jest-date-mock"]
+  "setupFiles": ["jest-date-mock", "./setupJestMock.js"]
 }
