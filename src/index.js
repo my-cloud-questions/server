@@ -1,7 +1,8 @@
-"use strict";
+import awsServerlessExpress from "@vendia/serverless-express";
+import app from "./app";
+
 process.env.EXECUTION_ENV_SERVERLESS = true;
 
-const awsServerlessExpress = require("@vendia/serverless-express");
-const app = require("./app").app;
+const handler = awsServerlessExpress({ app, logSettings: { level: "debug" } });
 
-exports.handler = awsServerlessExpress({ app });
+exports.handler = handler;

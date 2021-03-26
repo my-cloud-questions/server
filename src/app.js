@@ -41,5 +41,4 @@ export const init = () => {
 
 const expressApp = init();
 
-exports.app = expressApp;
 export default expressApp;
