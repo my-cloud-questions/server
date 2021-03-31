@@ -8,7 +8,7 @@ jest.mock("../../schema/platforms", () => {
   return { MOCK_SCHEMA: "MOCK_SCHEMA_VALUE" };
 });
 
-test("it should create course model", () => {
+test("it should create platform model", () => {
   require("./platforms.js");
   expect(model).toHaveBeenCalledTimes(1);
   expect(model).toHaveBeenCalledWith(

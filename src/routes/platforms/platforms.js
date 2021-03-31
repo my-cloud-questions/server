@@ -1,9 +1,9 @@
-import platformModel from "../../database/model/platforms";
 import { scan } from "../../database/operations";
 
 const platforms = async (req, res, next) => {
   try {
     req.logger.addEvent("Started");
+    const platformModel = await import("../../database/model/platforms");
     const result = await scan(platformModel);
     req.logger.addEvent("Retreive platforms");
     res.status(200);

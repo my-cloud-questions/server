@@ -1,11 +1,11 @@
 import health from "./health";
-import courses from "./courses";
 import platforms from "./platforms";
+// import courses from "./courses";
 
 const setupRoutes = (app) => {
   app.get("/health", health);
-  app.get("/courses", courses);
   app.get("/platforms", platforms);
+  // app.get("/courses", courses);
 };
 
 export default setupRoutes;
