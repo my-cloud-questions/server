@@ -1,7 +1,7 @@
-"use strict";
+// "use strict";
 
-import "core-js";
-import "regenerator-runtime/runtime";
+// import "core-js";
+// import "regenerator-runtime/runtime";
 
 import { connect } from "./database/operations";
 import errorHandler from "./middlewares/errorHandler";

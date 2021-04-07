@@ -1,8 +1,10 @@
 import { scan } from "../../database/operations";
 import platformModel from "../../database/model/platforms";
 import platforms from ".";
-
-jest.mock("../../database/model/platforms", () => jest.fn());
+const mockPlatformModel = jest.fn();
+jest.mock("../../database/model/platforms", () => {
+  return jest.fn().mockImplementation(() => mockPlatformModel);
+});
 jest.mock("../../database/operations");
 
 describe("when platform query returns result", () => {
@@ -25,6 +27,7 @@ describe("when platform query returns result", () => {
     expect(mockRequest.logger.done).toHaveBeenCalledTimes(1);
   });
   test("it should call scan database operation", () => {
+    // console.log(platformModel);
     expect(scan).toHaveBeenCalledWith(platformModel);
   });
   test("it should set response status", () => {
