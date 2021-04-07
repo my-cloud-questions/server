@@ -5,7 +5,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = (env) => {
   const config = {
-    entry: "./src/app.js",
+    entry: "./src/index.js",
     mode: "production",
     // devtool: "source-map",
     target: "node",
@@ -35,14 +35,15 @@ module.exports = (env) => {
     ],
     output: {
       path: path.join(__dirname, "dist"),
-      filename: "app.js"
+      filename: "index.js",
+      libraryTarget: "commonjs"
     }
   };
 
   const patterns = [{ from: "./package.json", to: "./" }];
-  if (env && env.AWS_LAMBDA) {
-    patterns.push({ from: "./src/index.js", to: "./" });
-  }
+  // if (env && env.AWS_LAMBDA) {
+  //   patterns.push({ from: "./src/index.js", to: "./" });
+  // }
   config.plugins.push(new CopyPlugin({ patterns }));
 
   return config;
